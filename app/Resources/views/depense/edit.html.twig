@@ -1,0 +1,21 @@
+{% extends 'utilisateurs/index_depense.html.twig' %}
+{%block add%}
+ <form>
+<input type="button" value="Nouveau" onclick="window.location.href='{{path('gestion_depense_new')}}'" />
+</form> 
+{%endblock%}
+{% block body %}
+    <h1>Depense edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+
+{{ form_start(delete_form) }}
+<input type="submit" value="Delete">
+{{ form_end(delete_form) }}
+
+<a href="{{ path('gestion_depense_index') }}">Back to the list</a>
+{% endblock %}

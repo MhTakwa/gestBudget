@@ -1,0 +1,40 @@
+{% extends 'admin/index.html.twig' %}
+{%block add%}
+ <form>
+<input type="button" value="Nouveau" onclick="window.location.href='{{path('admin_new')}}'" />
+</form> 
+{%endblock%}
+{% block body %}
+    <h1>{{utilisateur.nom}}  {{utilisateur.prenom}}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ utilisateur.id }}</td>
+            </tr>
+           
+            <tr>
+                <th>Role</th>
+                <td>{{ utilisateur.role }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ utilisateur.login }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ utilisateur.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+        
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+     
+    <a href="{{ path('admin_edit', { 'id': utilisateur.id }) }}">Edit</a>
+      <a href="{{ path('admin_index') }}">Back to the list</a>
+{% endblock %}

@@ -1,0 +1,103 @@
+{%extends 'utilisateurs/index.html.twig'%}
+ {%block body%}
+
+ <div class="span9">
+					<div class="content">
+                   <form action="{{path('create_rapports')}}" method="get">
+						<div class="module message">
+							<div class="module-head">
+								<h3>Rapports</h3>
+							</div>
+							<div class="module-option clearfix">
+								<div class="pull-left">
+									Type: &nbsp;
+									<div class="btn-group">
+										 <select name="type">
+                                               <option value="annee" selected="true">Annuel</option>
+                                                <option value="mois">Mensuel</option>
+                                                 </select> 
+									</div>
+								</div>
+							Date début:	<input type="date" name="debut">
+							
+								<div class="pull-right">
+								<input type="submit" class="btn btn-primary" value="Créer rapport" /></form>
+								</div>
+							</div>
+							<div class="module-body table">								
+
+								<table class="table table-message">
+									<tbody>
+										<tr class="heading">
+                                            <td></td>
+											<td class="cell-icon"></td>
+											<td class="cell-title">Type</td>
+											<td class="cell-status hidden-phone hidden-tablet">Periode</td>
+											<td class="cell-time align-right"></td>
+										</tr>
+										
+                                         {% if type is defined%}
+                                         
+										<form method="get" action="{{path('rapport_details')}}">
+										<tr class="task">
+										
+											<td class="cell-status hidden-phone hidden-tablet"><b class="due">Nouveau</b></td>
+											<td class="cell-title"><div>
+											<input type="hidden" name="type" value="{{type}}"/>
+                                               {{type}}
+                                               <input type="hidden" name="date1" value="{{date1}}"/>
+                                            <input type="hidden" name="date2" value="{{date2}}"/>
+                                            
+                                             
+          
+											
+											</div></td>
+											<td class="cell-status hidden-phone hidden-tablet">
+											 de {{date1}} à {{date2}}
+											</td>
+											<td class="cell-time align-right">
+											<input type="submit" value="details">
+											</td></form></tr>{%endif%}
+
+                                         {% if rapports is defined%}
+                                       {%for rapport in rapports%}
+										<form method="get" action="{{path('rapport_details')}}">
+										<tr class="task">
+											<td class="cell-icon"><i class="icon-checker high"></i></td>
+											<td class="cell-title"><div>
+											<input type="hidden" name="type" value="{{rapport.type}}"/>
+                                               {{rapport.type}}
+                                               <input type="hidden" name="date1" value="{{rapport.date1}}"/>
+                                            <input type="hidden" name="date2" value="{{rapport.date2}}"/>
+                                            
+                                             
+          
+											
+											</div></td>
+											<td class="cell-status hidden-phone hidden-tablet">
+											 de {{rapport.date1}} à {{rapport.date2}}
+											</td>
+											<td class="cell-time align-right">
+											<input type="submit" value="details">
+											</td></form></tr>{%endfor%}{%endif%}
+
+
+
+									
+									</tbody>
+								</table>
+
+
+							</div>
+							<div class="module-foot">
+							</div>
+						</div>
+						
+					</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+              
+                 {%endblock%}
+  

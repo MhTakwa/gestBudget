@@ -1,0 +1,66 @@
+{%extends 'utilisateurs/index.html.twig' %}
+{%block body%}						
+							<h5>Rapport Budget entre {{date1}}  et {{date2}}</h5>
+							
+								
+								<table class="table table-striped">
+								  <thead>
+									<tr>
+									  <th>Revenu</th>
+									  
+									</tr>
+								  </thead>
+								  <tbody>
+								  {%set total=0%}
+									<tr><td>Type</td><td>Montant(DT)</td></tr>
+									{%for revenu in revenu%}
+									<tr>
+									{% set total=total+revenu.mon%}
+									<td>{{revenu.type}}</td><td>{{revenu.mon}}</td>
+									</tr>
+									{%endfor%}
+								<tr> <td>total</td><td>{{total}}</td></tr>
+																 
+									
+									
+								  </tbody>
+								</table>
+									<table class="table table-striped">
+								  <thead>
+									<tr>
+									  <th>Depense</th>
+									  
+									</tr>
+								  </thead>
+								  <tbody>
+								 {%set totald=0%}
+									<tr><td>Type</td><td>Montant(DT)</td></tr>
+									{%for depense in depense%}
+									<tr>
+                                       {%set totald=totald+depense.mon%}
+									<td>{{depense.type}}</td><td>{{depense.mon}}</td>
+									</tr>
+									{%endfor%}
+									<tr> <td>total</td><td>{{totald}}</td></tr>
+								
+																 
+									
+									
+								  </tbody>
+								</table>
+<h1>Resumé</h1>
+<table>
+	<tr>
+		<td> revenu-depense =</td><td>{{total-totald}} DT</td>
+	</tr>
+</table>
+									<form method="get" action="{{path('new_rapport')}}">
+										
+											<input type="hidden" name="type" value="{{type}}"/>
+                                              
+                                               <input type="hidden" name="date1" value="{{date1}}"/>
+                                            <input type="hidden" name="date2" value="{{date2}}"/>
+                                            <input type="submit" class="btn-primary" value="Sauvegarder">
+                                            </form>
+
+{%endblock%}
